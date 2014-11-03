@@ -1,0 +1,128 @@
+<div class="general-block-decorator">
+    <div class="row">
+        <div class="col-md-12">
+
+            <ul id="tabbed-menu" class="nav nav-tabs">
+                <li>
+                    <a data-toggle="tab" href="#typetracking">{intl d='cookieconsent.ai' l="Types of cookie"}</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#options">{intl d='cookieconsent.ai' l="Options"}</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <!-- Define type of tracking -->
+                <div id="typetracking" class="tab-pane form-container">
+                    <div class='inner-toolbar'>
+
+                    </div>
+                    <div class="inner-actions">
+                        {form name="cookieconsent.type.add"}
+                        {if $error}
+                        <div class="alert alert-danger ">{intl l="There are errors." d='cookieconsent.ai'}</div>
+                        {/if}
+                        {if $smarty.session.success == 1}
+                        <div class="alert alert-success ">{intl l="Update successfully." d='cookieconsent.ai'}</div>
+                        {/if}
+                        <form action="{url path='admin/module/CookieConsent/AddType'}#typetracking" method="post">
+                            {form_hidden_fields form=$form}
+                            
+                            {render_form_field form=$form field='type_cookie'}
+                            
+                            <h2>{intl l="Informations about cookies :"}</h2>
+                            <div class="inner-toolbar">
+                                <ul class="nav nav-pills ">
+                                    {loop name="lang_list" type="lang"}
+                                    <li {if $ID == $edit_language_id}class="active" {assign var="code_lang" value="{$CODE}"}{/if}>
+                                        {if $current_tab}
+                                        {$lang_url = {url path={$page_url|default:$current_url nofilter} edit_language_id=$ID current_tab=$current_tab}}
+
+                                        {else}
+                                        {$lang_url = {url path={$page_url|default:$current_url nofilter} edit_language_id=$ID}}
+                                        {/if}
+                                        <a class="language-change-button" data-language-id="{$ID}" href="{$lang_url nofilter}#typetracking" title="{intl l='Edit information in %lng' lng={$TITLE}}">
+                                            <img src='{image file="../assets/img/flags/{$CODE}.png"}' alt="{$TITLE}" />
+                                        </a>
+                                    </li>
+                                    {/loop}
+                                </ul>
+                            </div>
+                            <table class="table table-striped table-condensed">
+                                {loop name="cookieconsent.loop.type" type="cookieconsent.loop.type" edit_lang="$edit_language_id"}
+                                <tr>
+                                    <td>
+                                        <h3>{$TITLE}</h3>
+                                        {form_field form=$form field="type_cookie_title_$ID" value="$TITLE"}
+                                        <label class='control-label'>{$label}</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <a class="copy-translation" data-text-num="0" href="#">
+                                                    <span class="glyphicon"><img src='{image file="../assets/img/flags/{$code_lang}.png"}' /></span>
+                                                </a>
+                                            </span>
+                                            <input type="text" value="{$TITLE}" name="{$name}" class="translation_field form-control" >
+                                        </div>
+                                        {/form_field}
+                                        
+                                        {form_field form=$form field="type_cookie_description_$ID" value="$DESCRIPTION"}
+                                        <label class='control-label'>{$label}</label>
+                                        <div class="input-group ">
+                                            <span class="input-group-addon">
+                                                <a class="copy-translation" data-text-num="0" href="#">
+                                                    <span class="glyphicon"><img src='{image file="../assets/img/flags/{$code_lang}.png"}' /></span>
+                                                </a>
+                                            </span>
+                                            <textarea rows='3' class="translation_field form-control" name="{$name}">{$DESCRIPTION}</textarea>
+                                        </div>
+                                        {/form_field}
+                                    </td>
+                                </tr>
+                                {/loop}
+                            </table>
+                            <div class="text-right">
+                                <button type="submit" name="cookieconsent_type_submit" value="stay" class="btn btn-default btn-primary" title="{intl l='Save'}">
+                                    <span class="glyphicon glyphicon-check"></span>
+                                    {intl l='Save'}
+                                </button>
+                            </div>
+                        </form>
+                        {/form}
+                    </div>
+                </div>
+                <!-- Define options of banner -->
+                <div id="options" class="tab-pane form-container">
+
+                    <div class='inner-actions'>
+                        {form name="cookieconsent.options.add"}
+                        {if $error}
+                        <div class="alert alert-danger ">{intl l="There are errors." d='cookieconsent.ai'}</div>
+                        {/if}
+                        {if $smarty.session.success}
+                        <div class="alert alert-success ">{intl l="Update successfully." d='cookieconsent.ai'}</div>
+                        {/if}
+                        <form action="{url path='admin/module/CookieConsent/AddOption'}#options" method="post">
+                            {form_hidden_fields form=$form}
+
+                            {render_form_field form=$form field='options_style'}
+                            <!--
+                            {render_form_field form=$form field='options_custom_style'}
+                            -->
+                            {render_form_field form=$form field='options_privacy_settings_tags'}
+                            {render_form_field form=$form field='options_tag_placement'}
+                            {render_form_field form=$form field='options_banner_placement'}
+                            {render_form_field form=$form field='options_banner_display_mode'}
+                            {render_form_field form=$form field='options_consent'}
+                            <div class="text-right">
+                                <button type="submit" name="cookieconsent_option_submit" value="stay" class="btn btn-default btn-primary" title="{intl l='Save'}">
+                                    <span class="glyphicon glyphicon-check"></span>
+                                    {intl l='Save'}
+                                </button>
+                            </div>
+                        </form>
+                        {/form}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

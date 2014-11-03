@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns="http://thelia.net/schema/dic/config"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
+
+    <loops>
+        <loop class="CookieConsent\Loop\TypeCookie" name="cookieconsent.loop.type"/>
+        <loop class="CookieConsent\Loop\OptionsCookie" name="cookieconsent.loop.options"/>
+    </loops>
+    <forms>
+        <form name="cookieconsent.type.add" class="CookieConsent\Form\AddTypeCookie" />
+        <form name="cookieconsent.options.add" class="CookieConsent\Form\AddOptionsCookie" />
+    </forms>
+</config>

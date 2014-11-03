@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="thelia" namespace="CookieConsent\Model">
+    <table name="cookieconsent_options" phpName="CookieconsentOption" namespace="">
+        <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
+        <column name="style" type="VARCHAR" size="255" />
+        <column name="banner_placement" type="VARCHAR" size="255" />
+        <column name="tag_placement" type="VARCHAR" size="255" />
+        <column name="privacy_settings_tags" type="VARCHAR" size="45" />
+        <column name="banner_display_mode" type="VARCHAR" size="255" />
+        <column name="consent" type="VARCHAR" size="45" />
+    </table>
+    <table name="cookieconsent_type" phpName="CookieconsentType" namespace="">
+        <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
+        <column name="name" type="VARCHAR" size="255" />
+        <column name="active" type="INTEGER" />
+    </table>
+    <table name="cookieconsent_type_i18n" phpName="CookieconsentTypeI18n" namespace="">
+        <column name="id" type="INTEGER" primaryKey="true" required="true" />
+        <column name="locale" type="VARCHAR" size="5" primaryKey="true" />
+        <column name="title" type="VARCHAR" size="255" />
+        <column name="description" type="VARCHAR" size="255" />
+        <column name="link" type="VARCHAR" size="255" />
+    </table>
+</database>
